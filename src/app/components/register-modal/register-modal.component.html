@@ -1,0 +1,70 @@
+<div class="modal" tabindex="-1" role="dialog" id="registerModal">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Account Signup</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-12">
+            <form name="registrationForm" novalidate>
+              <div class="form-group">
+                <label>User Name <small class="text-danger"
+                    *ngIf="userNameRegText.invalid && userNameRegText.touched">Required,
+                    minimum length 1, no spaces.</small></label>
+                <input type="text" class="form-control" name="userName" [(ngModel)]="registerModel.userName"
+                  placeholder="Ex: JohnD" minlength="3" maxlength="20"
+                  [ngClass]="{'is-invalid': userNameRegText.invalid && userNameRegText.touched }"
+                  title="Required with minimum length of 3." required #userNameRegText="ngModel">
+              </div>
+
+              <div class="form-group">
+                <label>Email Address <small class="text-danger" *ngIf="emailText.invalid && emailText.touched">Required,
+                    minimum length of 6.</small></label>
+                <input type="text" class="form-control" name="email" [(ngModel)]="registerModel.emailAddress"
+                  placeholder="Ex: John.Doe@gmail.com" minlength="6" maxlength="50"
+                  [ngClass]="{'is-invalid': emailText.invalid && emailText.touched }"
+                  title="Required with minimum length of 6." required #emailText="ngModel">
+              </div>
+
+              <div class="form-group">
+                <label>Password <small class="text-danger"
+                    *ngIf="passwordRegText.invalid && passwordRegText.touched">Required,
+                    minimum length of 1.</small></label>
+                <input type="password" class="form-control" name="passwordReg" [(ngModel)]="registerModel.password"
+                  minlength="1" maxlength="30" placeholder="Password" minlength="1"
+                  [ngClass]="{'is-invalid': passwordRegText.invalid && passwordRegText.touched }"
+                  title="Required with minimum length of 1." required #passwordRegText="ngModel">
+              </div>
+
+              <div class="form-group">
+                <label>Confirm Password <small class="text-danger"
+                    *ngIf="confirmPasswordText.touched && (confirmPasswordText.text != passwordRegText.text)">Passwords
+                    do not match.</small> <small class="text-danger"
+                    *ngIf="confirmPasswordText.invalid && confirmPasswordText.touched">Required,
+                    minimum length of 1.</small>
+                  <small class="text-danger"
+                    *ngIf="confirmPasswordText.touched && (registerModel.confirmPassword != registerModel.password)">
+                    Does not match password.
+                  </small>
+                </label>
+                <input type="password" class="form-control" name="confirmPasswordReg"
+                  [(ngModel)]="registerModel.confirmPassword" placeholder="Confirm Password" minlength="1"
+                  maxlength="30" [ngClass]="{'is-invalid': confirmPasswordText.invalid && confirmPasswordText.touched }"
+                  title="Required with minimum length of 1." required #confirmPasswordText="ngModel">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="register()"
+          [disabled]="emailText.invalid || userNameRegText.invalid || passwordRegText.invalid || confirmPasswordText.invalid || (registerModel.confirmPassword != registerModel.password)">Register</button>
+      </div>
+    </div>
+  </div>
+</div>

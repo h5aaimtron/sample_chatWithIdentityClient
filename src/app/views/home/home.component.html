@@ -1,0 +1,28 @@
+<section class="container">
+  <div class="row" style="height: 400px;">
+    <div class="col-lg-2 col-md-4 col-sm-6 h-100 bg-light" style="overflow-y: auto; overflow-x: hidden;">
+      <ul  style="list-style: none;">
+        <li *ngFor="let user of users">
+          <span class="font-weight-bolder">{{user}}</span>
+        </li>
+      </ul>
+    </div>
+    <div class="col-lg-10 col-md-8 col-sm-6 h-100" style="overflow-y: auto; overflow-x: hidden;">
+      <ul style="list-style: none;">
+        <li *ngFor="let message of messages">
+          <span class="font-weight-bolder">{{message.userName}}:</span> {{message.message}}
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-2 col-md-4 col-sm-6 bg-light">
+
+    </div>
+    <div class="col-lg-10 col-md-8 col-sm-6">
+      <div class="form-group">
+        <input class="form-control" placeholder="Type message here..." [(ngModel)]="chatText" (keyup.enter)="send()">
+      </div>
+    </div>
+  </div>
+</section>
